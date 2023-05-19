@@ -867,7 +867,7 @@
         var result = event.results[0][0].transcript;
         voiceSearchInput.value = result;
         // Trigger the predictive search with the recognized speech as the search query
-        predictiveSearch(result);
+        predictiveSearchBes(result);
       };
 
       // Start or stop listening when the button is clicked
@@ -890,7 +890,7 @@
 
   });
 
-  function predictiveSearch() {
+  function predictiveSearchBes(query) {
     console.log('Search query: ' + query);
     voiceSearchInput.trigger("click"); 
     }
