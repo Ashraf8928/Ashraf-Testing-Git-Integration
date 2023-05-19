@@ -22,7 +22,6 @@ $(document).ready(function() {
         $voiceSearchButton.find('img').attr('src', 'path/to/voice-icon.png');
       };
 
-      // Process the recognized speech
       recognition.onresult = function(event) {
         var result = event.results[0][0].transcript;
         $voiceSearchInput.val(result);
