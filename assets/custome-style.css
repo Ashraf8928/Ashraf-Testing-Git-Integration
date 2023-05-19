@@ -2,6 +2,21 @@
     padding-left:5rem ;
     padding-right: 5rem;
 }
+.px-15px{
+    font-size: 15px;
+}
+
+.px-18px {
+    font-size: 18px;
+}
+
+.px-20{
+    font-size: 20px;
+}
+
+px-30{
+    font-size: 30px;
+}
 
 @media (max-width:768px) {
     .px-5rem{
