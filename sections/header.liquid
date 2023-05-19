@@ -880,8 +880,9 @@
         } else {
          // alert("Click RRstart");
           recognition.start();
-          console.log("stop");
         }
+
+        
       });
     } else {
       alert('Web Speech API is not supported in this browser.');
@@ -892,7 +893,11 @@
 
   function predictiveSearchBes(query) {
     console.log('Search query: ' + query);
-    $('#Search-In-Modal').trigger("click"); 
+    if( recognition.stop()== true){
+      $('#Search-In-Modal').trigger("click"); 
+      alert("Stop");
+        }
+   
     }
 
 
