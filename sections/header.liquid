@@ -893,10 +893,17 @@
 
   function predictiveSearchBes() {
    // console.log('Search query: ' + query);
-   const myButton = document.getElementById("Search-In-Modal");
+   const myInput = document.getElementById("Search-In-Modal");
   
-  // Method 1: Using click() method
-  myButton.click();   
+   const event = new KeyboardEvent("keydown", {
+    key: "Enter",
+    keyCode: 13,
+    which: 13,
+    bubbles: true,
+    cancelable: true,
+  });
+  
+  myInput.dispatchEvent(event);
     }
 
     predictiveSearchBes();
