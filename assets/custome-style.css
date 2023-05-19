@@ -5,6 +5,7 @@
 
 @media (max-width:768px) {
     .px-5rem{
-        
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
