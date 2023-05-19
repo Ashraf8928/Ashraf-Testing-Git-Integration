@@ -838,7 +838,8 @@
 
 <script>
   //Voice Search
-  document.addEventListener('DOMContentLoaded', function() {
+ /* document.addEventListener('DOMContentLoaded', function() {
+
     var voiceSearchButton = document.getElementById('voice-src-btn');
     var voiceSearchInput = document.getElementById('Search-In-Modal');
 
@@ -884,52 +885,67 @@
       alert('Web Speech API is not supported in this browser.');
     }
   });
+*/
+class PredictiveSearch extends SearchForm {
+  // ...
 
-  function predictiveSearch(query) {
-    getSearchResults(searchTerm) {
-      const queryKey = searchTerm.replace(" ", "-").toLowerCase();
-      this.setLiveRegionLoadingState();
-  
-      if (this.cachedResults[queryKey]) {
-        this.renderSearchResults(this.cachedResults[queryKey]);
-        return;
-      }
-  
-      fetch(
-        `${routes.predictive_search_url}?q=${encodeURIComponent(
-          searchTerm
-        )}&section_id=predictive-search`,
-        { signal: this.abortController.signal }
-      )
-        .then((response) => {
-          if (!response.ok) {
-            var error = new Error(response.status);
-            this.close();
-            throw error;
-          }
-  
-          return response.text();
-        })
-        .then((text) => {
-          const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
-          // Save bandwidth keeping the cache in all instances synced
-          this.allPredictiveSearchInstances.forEach(
-            (predictiveSearchInstance) => {
-              predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
-            }
-          );
-          this.renderSearchResults(resultsMarkup);
-        })
-        .catch((error) => {
-          if (error?.code === 20) {
-            // Code 20 means the call was aborted
-            return;
-          }
-          this.close();
-          throw error;
-        });
+  startVoiceRecognition() {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+
+      recognition.onresult = event => {
+        const result = event.results[0][0].transcript;
+        this.input.value = result;
+        this.onChange();
+      };
+
+      recognition.start();
+    } else {
+      console.log('Voice recognition is not supported in this browser.');
     }
   }
+
+  setupEventListeners() {
+    // ...
+
+    // Start voice recognition when the page loads
+    window.addEventListener('load', this.startVoiceRecognition.bind(this));
+  }
+
+  // ...
+}
+  
+class PredictiveSearch extends SearchForm {
+  // ...
+
+  onChange() {
+    super.onChange();
+    const newSearchTerm = this.getQuery();
+    if (!this.searchTerm || !newSearchTerm.startsWith(this.searchTerm)) {
+      // Remove the results when they are no longer relevant for the new search term
+      // so they don't show up when the dropdown opens again
+      this.querySelector("#predictive-search-results-groups-wrapper")?.remove();
+    }
+
+    // Update the term asap, don't wait for the predictive search query to finish loading
+    this.updateSearchForTerm(this.searchTerm, newSearchTerm);
+
+    this.searchTerm = newSearchTerm;
+
+    if (!this.searchTerm.length) {
+      this.close(true);
+      return;
+    }
+
+    this.getSearchResults(this.searchTerm);
+  }
+
+  // ...
+}
+
+
+  
 </script>
 <script type="application/ld+json">
   {
