@@ -886,8 +886,7 @@
   });
 
   function predictiveSearch(query) {
-    this.renderSearchResults(this.cachedResults[queryKey]);
-    return;
+    customElements.define('predictive-search', PredictiveSearch);
   }
 </script>
 <script type="application/ld+json">
