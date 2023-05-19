@@ -18,6 +18,8 @@
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    <link rel="stylesheet href="{{ 'tailwind.css' | asset_url }}" />
+
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link
         rel="preconnect"
