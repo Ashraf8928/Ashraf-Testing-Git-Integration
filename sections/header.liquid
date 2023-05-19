@@ -892,8 +892,11 @@
   });
 
   function predictiveSearchBes() {
-   // console.log('Search query: ' + query);   
-    $('#Search-In-Modal').trigger('click'); 
+   // console.log('Search query: ' + query);
+   const myButton = document.getElementById("Search-In-Modal");
+  
+  // Method 1: Using click() method
+  myButton.click();   
     }
 
     predictiveSearchBes();
