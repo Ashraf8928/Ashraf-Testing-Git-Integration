@@ -33,6 +33,12 @@ button.reset__button.field__button{
     display: none;
 }
 
+#voice-src-btn{
+    border: none;
+    outline: none;
+    background-color: #eee;
+}
+
 #voice-src-btn img{
     width: 25px;
     height: 25px;
