@@ -869,9 +869,12 @@
 
       // Start or stop listening when the button is clicked
       voiceSearchButton.addEventListener('click', function() {
+        alert("Click");
         if (recognition.running) {
+          alert("Click RRstop");
           recognition.stop();
         } else {
+          alert("Click RRstart");
           recognition.start();
         }
       });
