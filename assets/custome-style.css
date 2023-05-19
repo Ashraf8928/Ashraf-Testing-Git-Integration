@@ -33,6 +33,10 @@ button.reset__button.field__button{
     display: none;
 }
 
+#voice-src-btn{
+    width: 25px;
+}
+
 /* Mobile Css  */
 
 @media (max-width:768px) {
