@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-    var $voiceSearchButton = $('#voiceSearchButton');
+    var $voiceSearchButton = $('#voice-src-btn');
     var $voiceSearchInput = $('#voiceSearchInput');
 
     
