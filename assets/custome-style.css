@@ -33,14 +33,9 @@ button.reset__button.field__button{
     display: none;
 }
 
-#voice-src-btn{
+#voice-src-btn img{
     width: 25px;
     height: 25px;
-}
-
-#voice-src-btn img{
-width: 100%;
-height: 100%;
 }
 
 /* Mobile Css  */
