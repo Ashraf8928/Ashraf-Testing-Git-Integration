@@ -25,6 +25,10 @@ px-30{
     background-color: #eee;
 }
 
+predictive-search.search-modal__form label{
+    display: none;
+}
+
 /* Mobile Css  */
 
 @media (max-width:768px) {
