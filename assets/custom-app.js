@@ -31,7 +31,8 @@ $(document).ready(function() {
       };
 
     
-      $voiceSearchButton.click(function() {
+      $voiceSearchButton.on('click',function() {
+        alert("This is Testing Alert");
         if (recognition.running) {
           recognition.stop();
         } else {
