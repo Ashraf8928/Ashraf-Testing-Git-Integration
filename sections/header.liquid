@@ -836,50 +836,54 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 <script>
-  var $voiceSearchButton = $('#voice-src-btn');
-  var $voiceSearchInput = $('#Search-In-Modal');
+  document.addEventListener('DOMContentLoaded', function() {
+    var voiceSearchButton = document.getElementById('voiceSearchButton');
+    var voiceSearchInput = document.getElementById('voiceSearchInput');
 
-  
-  if ('webkitSpeechRecognition' in window) {
-    var recognition = new webkitSpeechRecognition();
+    // Check if the browser supports the Web Speech API
+    if ('webkitSpeechRecognition' in window) {
+      var recognition = new webkitSpeechRecognition();
 
-    
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
+      // Set the recognition parameters
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
 
-  
-    recognition.onstart = function() {
-      $voiceSearchButton.find('img').attr('src', 'path/to/listening-icon.png');
-    };
+      // When speech recognition starts, update the button image
+      recognition.onstart = function() {
+        voiceSearchButton.querySelector('img').src = 'path/to/listening-icon.png';
+      };
 
-    
-    recognition.onend = function() {
-      $voiceSearchButton.find('img').attr('src', 'path/to/voice-icon.png');
-    };
+      // When speech recognition ends, update the button image
+      recognition.onend = function() {
+        voiceSearchButton.querySelector('img').src = 'path/to/voice-icon.png';
+      };
 
-    recognition.onresult = function(event) {
-      var result = event.results[0][0].transcript;
-      $voiceSearchInput.val(result);
-     
-      predictiveSearch(result);
-    };
+      // Process the recognized speech
+      recognition.onresult = function(event) {
+        var result = event.results[0][0].transcript;
+        voiceSearchInput.value = result;
+        // Trigger the predictive search with the recognized speech as the search query
+        predictiveSearch(result);
+      };
 
-  } else {
-    alert('Web Speech API is not supported in this browser.');
-  }
-
-  $voiceSearchButton.on('click',function() {
-    alert("This is Testing Alert");
-   
+      // Start or stop listening when the button is clicked
+      voiceSearchButton.addEventListener('click', function() {
+        if (recognition.running) {
+          recognition.stop();
+        } else {
+          recognition.start();
+        }
+      });
+    } else {
+      alert('Web Speech API is not supported in this browser.');
+    }
   });
 
-
-function predictiveSearch(query) {
-  renderSearchResults(resultsMarkup);
-}
+  function predictiveSearch(query) {
+    renderSearchResults(resultsMarkup);
+  }
 </script>
-
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
