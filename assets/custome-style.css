@@ -38,6 +38,11 @@ button.reset__button.field__button{
     height: 25px;
 }
 
+#voice-src-btn img{
+width: 100%;
+height: 100%;
+}
+
 /* Mobile Css  */
 
 @media (max-width:768px) {
