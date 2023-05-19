@@ -858,7 +858,7 @@
     "url": {{ request.origin | append: page.url | json }}
   }
 
-  $(document).ready(function() {
+
     
     var $voiceSearchButton = $('#voice-src-btn');
     var $voiceSearchInput = $('#Search-In-Modal');
@@ -901,7 +901,7 @@
     } else {
       alert('Web Speech API is not supported in this browser.');
     }
-  });
+
   
   function predictiveSearch(query) {
     renderSearchResults(resultsMarkup);
