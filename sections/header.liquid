@@ -892,15 +892,11 @@
   });
 
   function predictiveSearchBes(query) {
-    console.log('Search query: ' + query);
-    if( recognition.stop()== true){
-      $('#Search-In-Modal').trigger("click"); 
-      alert("Stop");
-        }
-   
+    console.log('Search query: ' + query);   
+    $('#Search-In-Modal').trigger('click'); 
     }
 
-
+    predictiveSearchBes(query);
   
 </script>
 <script type="application/ld+json">
