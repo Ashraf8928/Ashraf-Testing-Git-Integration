@@ -37,6 +37,9 @@ button.reset__button.field__button{
     border: none;
     outline: none;
     background-color: #eee;
+    position: absolute;
+    right: 10px;
+    top: 8px;
 }
 
 #voice-src-btn img{
