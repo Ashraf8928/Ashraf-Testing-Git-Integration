@@ -536,6 +536,12 @@ video {
 .flex-wrap {
   flex-wrap: wrap;
 }
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -549,10 +555,6 @@ video {
 }
 .italic {
   font-style: italic;
-}
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .outline {
   outline-style: solid;
