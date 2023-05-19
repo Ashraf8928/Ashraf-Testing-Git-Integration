@@ -891,23 +891,12 @@
 
   });
 
-  function predictiveSearchBes() {
-   // console.log('Search query: ' + query);
-   const myButton = document.getElementById("Search-In-Modal");
-   const myInput = document.getElementById("myInput");
-  
-   const event = new KeyboardEvent("keydown", {
-    key: "Enter",
-    keyCode: 13,
-    which: 13,
-    bubbles: true,
-    cancelable: true,
-  });
-  
-  myInput.dispatchEvent(event);
+  function predictiveSearchBes(query) {
+    console.log('Search query: ' + query);   
+    $('#Search-In-Modal').trigger("click"); 
     }
 
-    predictiveSearchBes();
+
   
 </script>
 <script type="application/ld+json">
