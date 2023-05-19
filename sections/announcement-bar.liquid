@@ -28,19 +28,27 @@
 
 {% schema %}
   {
-    "name": "t:sections.announcement-bar.name",
-    "max_blocks": 12,
+    "name": "Announcement Bar",
+    "max_blocks": 1,
     "class": "announcement-bar-section",
     "blocks": [
       {
         "type": "announcement",
-        "name": "t:sections.announcement-bar.blocks.announcement.name",
+        "name": "Add Your Announcment",
         "settings": [
           {
             "type": "text",
-            "id": "text",
+            "id": "announcement__text",
             "default": "Welcome to our store",
-            "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+            "label": "You Announcement"
+          }, {
+            "type": "text",
+            "id": "announcement__link__title",
+            "label": "Give Your Own Title"
+          }, {
+            "type": "url",
+            "id": "announcement__link",
+            "label": "Your Title Redirect Link"
           }
         ]
       }
