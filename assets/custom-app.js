@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     var $voiceSearchButton = $('#voice-src-btn');
-    var $voiceSearchInput = $('#voiceSearchInput');
+    var $voiceSearchInput = $('#Search-In-Modal');
 
     
     if ('webkitSpeechRecognition' in window) {
