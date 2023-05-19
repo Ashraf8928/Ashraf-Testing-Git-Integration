@@ -865,18 +865,18 @@
       predictiveSearch(result);
     };
 
-  
-    $voiceSearchButton.on('click',function() {
-      alert("This is Testing Alert");
-      if (recognition.running) {
-        recognition.stop();
-      } else {
-        recognition.start();
-      }
-    });
   } else {
     alert('Web Speech API is not supported in this browser.');
   }
+
+  $voiceSearchButton.on('click',function() {
+    alert("This is Testing Alert");
+    if (recognition.running) {
+      recognition.stop();
+    } else {
+      recognition.start();
+    }
+  });
 
 
 function predictiveSearch(query) {
