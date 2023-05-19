@@ -876,9 +876,11 @@
         if (recognition.running) {
         //  alert("Click RRstop");
           recognition.stop();
+          console.log("running");
         } else {
          // alert("Click RRstart");
           recognition.start();
+          console.log("stop");
         }
       });
     } else {
