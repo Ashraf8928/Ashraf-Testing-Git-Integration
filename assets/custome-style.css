@@ -29,6 +29,10 @@ predictive-search.search-modal__form label{
     display: none;
 }
 
+button.reset__button.field__button{
+    display: none;
+}
+
 /* Mobile Css  */
 
 @media (max-width:768px) {
