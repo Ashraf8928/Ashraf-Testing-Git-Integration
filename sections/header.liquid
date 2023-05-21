@@ -364,6 +364,7 @@
           <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
             <div class="modal-overlay"></div>
             <div class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}" tabindex="-1">
+              <div class="mobile_menu_liquid">
               {%- if settings.predictive_search_enabled -%}
                 <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
               {%- else -%}
@@ -422,6 +423,7 @@
                 </search-form>
               {%- endif -%}
               <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                </div>
                 <svg class="icon icon-close" aria-hidden="true" focusable="false">
                   <use href="#icon-close">
                 </svg>
@@ -867,7 +869,7 @@
   recognition.onresult = function(event) {
     var transcript = event.results[event.results.length - 1][0].transcript;
     $searchInput.val(transcript); // Set the value of the input field to the recognized speech
-  // $searchInput.focus();
+   $searchInput.focus();
   };
 
   // Event listener for speech recognition end
