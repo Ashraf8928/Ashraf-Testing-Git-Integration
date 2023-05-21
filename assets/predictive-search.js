@@ -345,7 +345,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-    fetch(`/search/suggest?q=${query}&section_id=predictive-search`)
+    onChange() {
+      const searchTerm = query;
+  
+      if (!searchTerm.length) {
+        this.close();
+        return;
+      }
+  
+      this.getSearchResults(searchTerm);
+    }
+  
+    getSearchResults(searchTerm) {
+      fetch(`/search/suggest?q=${searchTerm}&section_id=predictive-search`)
+        .then((response) => {
+          if (!response.ok) {
+            var error = new Error(response.status);
+            this.close();
+            throw error;
+          }
+  
+          return response.text();
+        })
+        .then((text) => {
+          const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
+          this.predictiveSearchResults.innerHTML = resultsMarkup;
+          this.open();
+        })
+        .catch((error) => {
+          this.close();
+          throw error;
+        });
+    }
+  
+    open() {
+      this.predictiveSearchResults.style.display = 'block';
+    }
+  
+    close() {
+      this.predictiveSearchResults.style.display = 'none';
+    }
   }
 
 customElements.define('predictive-search', PredictiveSearch);
