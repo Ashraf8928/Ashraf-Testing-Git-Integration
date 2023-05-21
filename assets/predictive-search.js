@@ -378,13 +378,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
   
-    open() {
-      this.predictiveSearchResults.style.display = 'block';
-    }
-  
-    close() {
-      this.predictiveSearchResults.style.display = 'none';
-    }
+   
+  }
+
+  open() {
+    this.predictiveSearchResults.style.display = 'block';
+  }
+
+  close() {
+    this.predictiveSearchResults.style.display = 'none';
   }
 
 customElements.define('predictive-search', PredictiveSearch);
