@@ -867,6 +867,7 @@
   recognition.onresult = function(event) {
     var transcript = event.results[event.results.length - 1][0].transcript;
     $searchInput.val(transcript); // Set the value of the input field to the recognized speech
+    $searchInput.focus();
   };
 
   // Event listener for speech recognition end
