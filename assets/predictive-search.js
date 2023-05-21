@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-      fetch(`/search/suggest?q=${query}&section_id=predictive-search`)
+      fetch(`${query}`)
         .then((response) => {
           if (!response.ok) {
             var error = new Error(response.status);
