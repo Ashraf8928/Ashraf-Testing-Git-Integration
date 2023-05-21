@@ -346,8 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function  predictiveSearchBes(query) {
     const queryKey = query.replace(" ", "-").toLowerCase();
-    this.setLiveRegionLoadingState();
-
+    
     if (this.cachedResults[queryKey]) {
       this.renderSearchResults(this.cachedResults[queryKey]);
       return;
