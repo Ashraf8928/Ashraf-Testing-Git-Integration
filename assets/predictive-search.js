@@ -345,19 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-    onChange() {
-      const searchTerm = query;
-  
-      if (!searchTerm.length) {
-        this.close();
-        return;
-      }
-  
-      this.getSearchResults(searchTerm);
-    }
-  
-    getSearchResults(searchTerm) {
-      fetch(`/search/suggest?q=${searchTerm}&section_id=predictive-search`)
+      fetch(`/search/suggest?q=${query}&section_id=predictive-search`)
         .then((response) => {
           if (!response.ok) {
             var error = new Error(response.status);
@@ -376,17 +364,11 @@ document.addEventListener('DOMContentLoaded', function() {
           this.close();
           throw error;
         });
-    }
+    
   
    
   }
 
-  open() {
-    this.predictiveSearchResults.style.display = 'block';
-  }
 
-  close() {
-    this.predictiveSearchResults.style.display = 'none';
-  }
 
 customElements.define('predictive-search', PredictiveSearch);
