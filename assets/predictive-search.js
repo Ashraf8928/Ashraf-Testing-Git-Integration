@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function predictiveSearchBes(query) {
-    getResultsMaxHeight(query);
+  renderSearchResults(query) ;
   }
 
 customElements.define('predictive-search', PredictiveSearch);
