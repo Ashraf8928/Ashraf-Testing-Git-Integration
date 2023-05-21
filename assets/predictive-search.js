@@ -344,8 +344,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function predictiveSearchBes(query) {
-  renderSearchResults(query) ;
+  function  predictiveSearchBes(query) {
+    const queryKey = query.replace(" ", "-").toLowerCase();
+    this.setLiveRegionLoadingState();
+
+    if (this.cachedResults[queryKey]) {
+      this.renderSearchResults(this.cachedResults[queryKey]);
+      return;
+    }
+
+    fetch(
+      `${routes.predictive_search_url}?q=${encodeURIComponent(
+        searchTerm
+      )}&section_id=predictive-search`,
+      { signal: this.abortController.signal }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          var error = new Error(response.status);
+          this.close();
+          throw error;
+        }
+
+        return response.text();
+      })
+      .then((text) => {
+        const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
+        // Save bandwidth keeping the cache in all instances synced
+        this.allPredictiveSearchInstances.forEach(
+          (predictiveSearchInstance) => {
+            predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
+          }
+        );
+        this.renderSearchResults(resultsMarkup);
+      })
+      .catch((error) => {
+        if (error?.code === 20) {
+          // Code 20 means the call was aborted
+          return;
+        }
+        this.close();
+        throw error;
+      });
   }
 
 customElements.define('predictive-search', PredictiveSearch);
