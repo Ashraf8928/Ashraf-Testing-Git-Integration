@@ -345,46 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-    const queryKey12 = query.replace(" ", "-").toLowerCase();
-    
-    if (this.cachedResults[queryKey12]) {
-      this.renderSearchResults(this.cachedResults[queryKey12]);
-      return;
-    }
-
-    fetch(
-      `${routes.predictive_search_url}?q=${encodeURIComponent(
-        searchTerm
-      )}&section_id=predictive-search`,
-      { signal: this.abortController.signal }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          var error = new Error(response.status);
-          this.close();
-          throw error;
-        }
-
-        return response.text();
-      })
-      .then((text) => {
-        const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
-        // Save bandwidth keeping the cache in all instances synced
-        this.allPredictiveSearchInstances.forEach(
-          (predictiveSearchInstance) => {
-            predictiveSearchInstance.cachedResults[queryKey12] = resultsMarkup;
-          }
-        );
-        this.renderSearchResults(resultsMarkup);
-      })
-      .catch((error) => {
-        if (error?.code === 20) {
-          // Code 20 means the call was aborted
-          return;
-        }
-        this.close();
-        throw error;
-      });
+    fetch(`/search/suggest?q=${query}&section_id=predictive-search`)
   }
 
 customElements.define('predictive-search', PredictiveSearch);
