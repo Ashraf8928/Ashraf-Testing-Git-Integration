@@ -345,10 +345,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-    const queryKey = query.replace(" ", "-").toLowerCase();
+    const queryKey12 = query.replace(" ", "-").toLowerCase();
     
     if (this.cachedResults[queryKey]) {
-      this.renderSearchResults(this.cachedResults[queryKey]);
+      this.renderSearchResults(this.cachedResults[queryKey12]);
       return;
     }
 
@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Save bandwidth keeping the cache in all instances synced
         this.allPredictiveSearchInstances.forEach(
           (predictiveSearchInstance) => {
-            predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
+            predictiveSearchInstance.cachedResults[queryKey12] = resultsMarkup;
           }
         );
         this.renderSearchResults(resultsMarkup);
