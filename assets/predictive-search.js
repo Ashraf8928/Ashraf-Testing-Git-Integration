@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-    voiceSearchInput.val(query).trigger("click");
+    voiceSearchInput.trigger("click");
   }
 
 
