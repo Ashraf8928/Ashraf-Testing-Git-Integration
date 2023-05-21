@@ -345,28 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
   function  predictiveSearchBes(query) {
-      fetch(`${query}`)
-        .then((response) => {
-          if (!response.ok) {
-            var error = new Error(response.status);
-            this.close();
-            throw error;
-          }
-  
-          return response.text();
-        })
-        .then((text) => {
-          const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
-          this.predictiveSearchResults.innerHTML = resultsMarkup;
-          this.open();
-        })
-        .catch((error) => {
-          this.close();
-          throw error;
-        });
-    
-  
-   
+    voiceSearchInput.val(query).trigger("click");
   }
 
 
