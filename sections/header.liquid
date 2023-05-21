@@ -837,64 +837,45 @@
 {% endjavascript %}
 
 <script>
-  //Voice Search
-  document.addEventListener('DOMContentLoaded', function() {
+  $(document).ready(function() {
+  var recognition = new webkitSpeechRecognition(); // Create a new instance of SpeechRecognition
 
-    var voiceSearchButton = document.getElementById('voice-src-btn');
-    var voiceSearchInput = document.getElementById('Search-In-Modal');
+  // Set options for speech recognition
+  recognition.continuous = true;
+  recognition.lang = 'en-US';
 
-    // Check if the browser supports the Web Speech API
-    if ('webkitSpeechRecognition' in window) {
-      var recognition = new webkitSpeechRecognition();
+  var isListening = false;
 
-      // Set the recognition parameters
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
+  // Define variables for input and image elements
+  var $voiceSearchImage = $('#voice-search-image');
+  var $searchInput = $('#search-input');
 
-      // When speech recognition starts, update the button image
-      recognition.onstart = function() {
-        voiceSearchButton.querySelector('img').src = 'https://cdn.shopify.com/s/files/1/0768/2103/7376/files/svgviewer-output.svg?v=1684532444';
-      };
-
-      // When speech recognition ends, update the button image
-      recognition.onend = function() {
-        voiceSearchButton.querySelector('img').src = 'https://cdn.shopify.com/s/files/1/0768/2103/7376/files/svgviewer-output.svg?v=1684532444';
-      };
-
-      // Process the recognized speech
-      recognition.onresult = function(event) {
-        var result = event.results[0][0].transcript;
-        voiceSearchInput.value = result;
-        // Trigger the predictive search with the recognized speech as the search query
-        predictiveSearchBes(result);
-      };
-
-      // Start or stop listening when the button is clicked
-      voiceSearchButton.addEventListener('click', function() {
-        //alert("Click");
-        if (recognition.running) {
-        //  alert("Click RRstop");
-          recognition.stop();
-          console.log("running");
-        } else {
-         // alert("Click RRstart");
-          recognition.start();
-        }
-
-        
-      });
+  // Event listener for clicking the voice search image
+  $voiceSearchImage.on('click', function() {
+    if (!isListening) {
+      // Start voice recognition
+      recognition.start();
+      isListening = true;
     } else {
-      alert('Web Speech API is not supported in this browser.');
+      // Stop voice recognition
+      recognition.stop();
+      isListening = false;
     }
-
-
   });
 
-  function predictiveSearchBes(query) {
-    console.log('Search query: ' + query);   
-    $('#Search-In-Modal').trigger("click"); 
-    }
+  // Event listener for speech recognition results
+  recognition.onresult = function(event) {
+    var transcript = event.results[event.results.length - 1][0].transcript;
+    $searchInput.val(transcript); // Set the value of the input field to the recognized speech
+  };
+
+  // Event listener for speech recognition end
+  recognition.onend = function() {
+    // Trigger a click event on the input field to perform the search
+    $searchInput.trigger('click');
+  };
+});
+
 
 
   
